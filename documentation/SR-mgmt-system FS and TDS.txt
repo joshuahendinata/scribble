@@ -1,0 +1,63 @@
+=======================
+Functional Specs
+=======================
+Glossary:
+1. Request: a request from devs/leads
+2. SR: a service request that has been raised 
+
+Scope of system: Only for C2IS-CSI SR
+
+
+- System will capture: 
+Incident ID, 
+Request description, 
+Request instruction + attachment, 
+Request category: Batch log (with date), App Log (with date), DB Query, DB patch, BPM query, BPM patch
+Request requested by (devs),
+Request Date,
+SR raised by (leads), 
+SR raised date, 
+SR no. used, 
+SR documents (upload),  
+Status: No Action, Raised, Cancelled
+
+- Developer can create and update SR as long as it is not raised
+
+- Leads can choose an SR and raise it. A sequence number will be generated to be used
+
+- Small text field to search for keywords. It will be checked against all column, except dates (just like outlook mailbox search)
+
+- Search between request date or SR raised date
+
+- The main table can be searched per column (like SQL developer)
+
+- The main table will be lazily loaded 10, 20, 30 records per page
+
+
+3 Pages
+- Main pages with tables and search fields
+- Create page
+- Update page
+
+2 Type of users
+- Devs: can request for SR, can update non-raised SR (anyone or their own only?)
+- Leads: all devs functionality + choosing SR and change the status to anything
+
+Core functionality
+- File management (upload/download)
+- Create and update
+- View and Search
+- Simple Login
+
+=======================
+Technical Specs
+=======================
+MEAN stack 
+Github
+Robo 3T for Mongo DB visualization
+
+System will be hosted at Dhany's jenkin's machine
+
+Future implementation
+- Auto SR generation using windward
+- User admin
