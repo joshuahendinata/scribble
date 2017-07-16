@@ -1,4 +1,5 @@
 module.exports = {
   requestTO: require('./RequestTO'),
-  SRTO: require('./SRTO')
+  SRTO: require('./SRTO'),
+  test: null
 };
