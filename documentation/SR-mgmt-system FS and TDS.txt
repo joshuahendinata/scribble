@@ -15,11 +15,11 @@ Request instruction + attachment,
 Request category: Batch log (with date), App Log (with date), DB Query, DB patch, BPM query, BPM patch
 Request requested by (devs),
 Request Date,
+Status: No Action, Raised, Cancelled
 SR raised by (leads), 
 SR raised date, 
 SR no. used, 
 SR documents (upload),  
-Status: No Action, Raised, Cancelled
 
 - Developer can create and update SR as long as it is not raised
 
@@ -57,6 +57,19 @@ Github
 Robo 3T for Mongo DB visualization
 
 System will be hosted at Dhany's jenkin's machine
+
+2 Object (one-to-many relationship)
+- Request
+
+- SR
+
+
+
+2 tabs
+- request list, if have the corresponding SR, clicks will open the 2nd tab
+
+- SR list, shows all the details
+
 
 Future implementation
 - Auto SR generation using windward
