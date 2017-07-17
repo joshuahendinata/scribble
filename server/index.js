@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Connect to MongoDB
 mongoose.connect('mongodb://admin:Password1@ds153732.mlab.com:53732/sr-mgmt-system');
@@ -47,4 +47,8 @@ mongoose.connection.once('open', function () {
 		console.log(person);
 	});
 
+});
+
+app.get('/', function(req, res, next){
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
