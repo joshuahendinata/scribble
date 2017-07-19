@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col">
       <div style="text-align:center">
@@ -14,18 +14,24 @@
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#request" role="tab">Request</a>
+          <a routerLink="/app/requestPage" routerLinkActive="active">Request</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#SR" role="tab">SR</a>
+          <a routerLink="/app/srPage" routerLinkActive="active">SR</a>
         </li>
       </ul>
 
       <!-- Tab panes -->
-      <div class="tab-content">
+      <!-- <div class="tab-content">
         <div class="tab-pane active" id="request" role="tabpanel">request</div>
         <div class="tab-pane" id="SR" role="tabpanel">sr</div>
-      </div>
+      </div>  -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

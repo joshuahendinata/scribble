@@ -49,6 +49,6 @@ mongoose.connection.once('open', function () {
 
 });
 
-app.get('/', function(req, res, next){
+app.get(['/app/*', '/', '/app'], function(req, res, next){
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });

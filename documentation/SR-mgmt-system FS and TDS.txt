@@ -33,6 +33,7 @@ SR documents (upload),
 
 - The main table will be lazily loaded 10, 20, 30 records per page
 
+- When SR is clicked, it will be navigated to request and show all the related request
 
 3 Pages
 - Main pages with tables and search fields
@@ -62,7 +63,6 @@ System will be hosted at Dhany's jenkin's machine
 - Request
 
 - SR
-
 
 
 2 tabs

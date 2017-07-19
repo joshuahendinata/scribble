@@ -1,0 +1,34 @@
+<!-- <form class="well" (submit)="addTask($event)">
+    <div class="form-group">
+        <input type="text" [(ngModel)]="title" name="title" class="form-control" placeholder="Add Task" />
+    </div>
+</form> -->
+<table class="table table-striped table-bordered table-hover table-sm table-responsive">
+  <thead>
+    <tr>
+      <th>SR No.</th>
+      <th>Remark</th>
+      <th>Raised By</th>
+      <th>Raised Date</th>
+      <th>Request List</th>
+      <th>SR doc.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let eachSr of srShownList">
+      <!-- <div class="col-md-1">
+            <input type="checkbox" [checked]="task.isDone" (click)="updateStatus(task)" /> 
+        </div>-->
+      <td>{{eachSr.srNo}}</td>
+      <td>{{eachSr.remark}}</td>
+      <td>{{eachSr.raisedBy}}</td>
+      <td>{{eachSr.raisedDate | date:'dd/MM/y HH:mm'}}</td>
+      <td>{{eachSr.requestList}}</td>
+      <td>{{eachSr.srDoc}}</td>
+    </tr>
+  </tbody>
+</table>
+
+  <!-- <div class="col-md-4">
+            <input type="button" value="delete" class="btn btn-danger" (click)="deleteTask(task._id)">
+        </div> -->
