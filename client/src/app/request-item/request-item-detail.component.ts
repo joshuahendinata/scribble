@@ -14,15 +14,19 @@ declare var jQuery: any;
 export class RequestItemDetailComponent implements OnInit {
 
     @Output() requestDetailClosedEvent: EventEmitter<any> = new EventEmitter();
+    @Output() searchProcessClicked: EventEmitter<any> = new EventEmitter();
     newRequest: RequestItem;
     existingRequest: RequestItem; // item passed from requestItemComponent
     renderOverlay: boolean;
+    pageFunction: string;
+    queryParam : any; // passed from request-item component
 
     constructor(private requestItemService: RequestItemService,
         private router: Router) {
 
         this.renderOverlay = false;
         this.newRequest = new RequestItem();
+        this.pageFunction = "Adding new request";
     }
 
     ngOnInit() {
@@ -68,13 +72,25 @@ export class RequestItemDetailComponent implements OnInit {
     }
 
     closeRequestDetail() {
+        
+        this.pageFunction = null;
         this.requestDetailClosedEvent.emit(null);
     }
 
     initUpdateRequestDetail(requestDetailItem: RequestItem) {
         console.log("initUpdateRequestDetail requestItem");
         console.log(requestDetailItem)
-        this.existingRequest = requestDetailItem;
-        this.newRequest = jQuery.extend(true, {}, requestDetailItem);
+        this.existingRequest = requestDetailItem; // cache the existing one
+        this.newRequest = jQuery.extend(true, {}, requestDetailItem); // clone the passed object
+        this.pageFunction = "Updating Request ID: " + this.newRequest._id;
+    }
+
+    initSearchRequest(){
+        this.pageFunction = "Search Request";
+        this.newRequest = new RequestItem();
+    }
+
+    searchRequestDetail(){
+        this.searchProcessClicked.emit(this.newRequest);
     }
 }

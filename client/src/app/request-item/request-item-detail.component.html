@@ -1,6 +1,6 @@
-<div class="overlay" *ngIf="renderOverlay">
+<div class="overlay" *ngIf="renderOverlay"></div>
 
-</div>
+<div class="alert alert-info" role="alert" *ngIf="pageFunction">{{pageFunction}}</div>
 
 <form #requestItemForm="ngForm" (ngSubmit)="requestDetailSubmit(requestItemForm)" ngNativeValidate>
     <div class="form-group row">
@@ -30,6 +30,7 @@
         <label for="category" class="col-lg-1 col-lg-form-label">Category</label>
         <div class="col-lg-11">
             <select required="true" class="form-control" id="category" name="category" [(ngModel)]="newRequest.requestCategory">
+                <option value="" selected="true">Select Here..</option>
                 <option>App Log</option>
                 <option>Batch log</option>
                 <option>DB Query</option>
@@ -50,7 +51,11 @@
     </div>
 
     <div class="pull-right">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button *ngIf="pageFunction == 'Search Request'; else submitButton" class="btn btn-primary"
+        (click)="searchRequestDetail(); false;">Search</button>
+        <ng-template #submitButton>
+            <button type="submit" class="btn btn-primary">Submit</button
+        ></ng-template>
         <button (click)="closeRequestDetail(); false;" class="btn btn-primary">Cancel</button>
     </div>
 </form>

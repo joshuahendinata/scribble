@@ -10,11 +10,30 @@ export class RequestItemService {
     }
 
     getRequestItems(queryParam) {
-        console.log("queryParam");
-        console.log(queryParam);
-        var str = Object.keys(queryParam).map(function (key) {
+
+        var str = Object.keys(queryParam).map(function (key: any) {
             if (key === 'sort' || key === 'limit' || key === 'skip') {
                 return key + '=' + encodeURIComponent(queryParam[key]);
+            }
+
+            // Transforming requestItem to query with regex 
+            if (key === 'queryObject' && queryParam[key] != null) {
+                var queryObject = queryParam[key];
+                var criteriaString = "";
+                for (var k in queryObject) {
+                    if (criteriaString != "") {
+                        criteriaString += "&";
+                    }
+
+                    if (queryObject[k].trim() === "") {
+                        continue;
+                    }
+
+                    criteriaString += (k + "__regex=/.*" + queryObject[k] + ".*/i");
+                }
+                console.log("criteriaStringkey");
+                console.log(criteriaString);
+                return criteriaString;
             }
             return '';
         }).join('&');
@@ -38,7 +57,7 @@ export class RequestItemService {
 
         // NO cache per request
         let headersAdditional: Headers;
-        headersAdditional = new Headers({'Cache-control': 'no-cache'})
+        headersAdditional = new Headers({ 'Cache-control': 'no-cache' })
         headersAdditional.append('Cache-control', 'no-store');
         headersAdditional.append('Expires', '0');
         headersAdditional.append('Pragma', 'no-cache');

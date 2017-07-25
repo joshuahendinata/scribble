@@ -11,18 +11,11 @@ import { RequestItemDetailComponent } from './request-item-detail.component';
 })
 export class RequestItemComponent implements OnInit, AfterViewInit {
 
-  ngAfterViewInit(): void {
-    this.requestItemDetailComponentList.changes.subscribe((comps: QueryList<RequestItemDetailComponent>) => {
-      console.log(comps);
-      this.requestItemDetailComponent = comps.first;
-    });
-
-  }
-
   renderRequestDetail: boolean;
   shownList: RequestItem[];
   queryParam: any;
 
+  // Annotation to tell angular to keep looking for a component. look for ngAfterViewInit()
   @ViewChildren("requestItemDetailComponent")
   private requestItemDetailComponentList: QueryList<RequestItemDetailComponent>;
 
@@ -38,6 +31,17 @@ export class RequestItemComponent implements OnInit, AfterViewInit {
 
     this.findRequestItemByCriteria();
     this.renderRequestDetail = false;
+  }
+
+
+  ngAfterViewInit(): void {
+
+    // Once requestItemDetail Component is found, immediately store into local variable for reference
+    this.requestItemDetailComponentList.changes.subscribe((comps: QueryList<RequestItemDetailComponent>) => {
+      console.log(comps);
+      this.requestItemDetailComponent = comps.first;
+    });
+
   }
 
   onNextPage() {
@@ -87,31 +91,6 @@ export class RequestItemComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
 
-  onRequestDetailClosed(component) {
-    console.log("onRequestDetailClosed");
-    console.log(component);
-
-    if (component != null && component.requestObject != null) {
-
-      // fetch again
-      if (component.addIndicator) {
-        //example: totalItem: 10, last page is full, and we add 1 item, need to skip until the new page
-        if (this.queryParam.totalItem == (Number(this.queryParam.limit) * this.queryParam.pageNo.length)){
-          this.queryParam.skip = (Number(this.queryParam.limit) * this.queryParam.pageNo.length);
-        }
-        this.findRequestItemByCriteria();
-        this.queryParam.activePage = this.queryParam.pageNo.length + 1;
-      } else {
-
-      }
-    }
-    this.renderRequestDetail = false;
-  }
-
-  onAddRequestClick(component) {
-    this.renderRequestDetail = true;
-  }
-
   updateRequestDetail(updatedRequest: RequestItem) {
     this.renderRequestDetail = true;
 
@@ -119,6 +98,47 @@ export class RequestItemComponent implements OnInit, AfterViewInit {
       this.requestItemDetailComponent.initUpdateRequestDetail(updatedRequest);
     }, 1);
   }
+
+  onAddRequestClick(component) {
+    this.renderRequestDetail = true;
+  }
+
+  /**
+   * Called when requestDetail is closed upon clicking submit or cancel
+   */
+  onRequestDetailClosed(component) {
+    console.log("onRequestDetailClosed");
+    console.log(component);
+
+    if (component != null && component.requestObject != null) {
+
+      if (component.addIndicator) {
+        //example: totalItem: 10, last page is full, and we add 1 item, need to skip until the new page
+        if (this.queryParam.totalItem == (Number(this.queryParam.limit) * this.queryParam.pageNo.length)) {
+          this.queryParam.skip = (Number(this.queryParam.limit) * this.queryParam.pageNo.length);
+          this.queryParam.activePage = this.queryParam.pageNo.length + 1;
+        }
+        this.findRequestItemByCriteria();
+      }
+    }
+    this.renderRequestDetail = false;
+    this.queryParam.queryObject = null;
+  }
+
+  onSearchRequestClick(component) {
+    this.renderRequestDetail = true;
+    setTimeout(() => { // ES6 workaround of function() to reference 'this'
+      this.requestItemDetailComponent.initSearchRequest();
+    }, 1);
+  }
+
+  onSearchProcessClicked(queryObject: RequestItem) {
+    this.queryParam.skip = 0;
+    this.queryParam.activePage = 1;
+    this.queryParam.queryObject = queryObject;
+    this.findRequestItemByCriteria();
+  }
+
 
   deleteRequestItem(deletedRequest: RequestItem) {
     var confirmDelete = confirm("Are you sure?");
@@ -137,5 +157,4 @@ export class RequestItemComponent implements OnInit, AfterViewInit {
 
     this.renderRequestDetail = false;
   }
-
 }
