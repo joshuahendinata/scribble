@@ -5,6 +5,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+global.dbConfigUrl = 'mongodb://admin:Password1@ds153732.mlab.com:53732/sr-mgmt-system';
 var _ = require('lodash');
 
 var app = express();
@@ -18,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Connect to MongoDB
-mongoose.connect('mongodb://admin:Password1@ds153732.mlab.com:53732/sr-mgmt-system');
+mongoose.connect(global.dbConfigUrl);
 mongoose.connection.once('open', function () {
 
 	app.models = require('./models/index');
@@ -26,7 +27,7 @@ mongoose.connection.once('open', function () {
 	// load ALL the routes
 	var routes = require('./routes');
 
-	// key, value in the routes.js
+	// iterate value, key in the routes.js
 	_.each(routes, function (controller, route) {
 		app.use(route, controller(app, route));
 	});

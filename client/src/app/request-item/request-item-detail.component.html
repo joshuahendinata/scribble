@@ -1,0 +1,56 @@
+<div class="overlay" *ngIf="renderOverlay">
+
+</div>
+
+<form #requestItemForm="ngForm" (ngSubmit)="requestDetailSubmit(requestItemForm)" ngNativeValidate>
+    <div class="form-group row">
+        <label for="incidentNo" class="col-lg-1 col-lg-form-label">Incident No.</label>
+        <div class="col-lg-11">
+            <input required="true" type="text" class="form-control" id="incidentNo" name="incidentNo" [(ngModel)]="newRequest.incidentNo">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="description" class="col-lg-1 col-lg-form-label">Description</label>
+        <div class="col-lg-11">
+            <textarea required="true" class="form-control" id="description" name="description" rows="2" placeholder="Put incident title. For non-incident, put justification for SR"
+                [(ngModel)]="newRequest.description"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="instruction" class="col-lg-1 col-lg-form-label">Instruction</label>
+        <div class="col-lg-11">
+            <textarea required="true" class="form-control" id="instruction" name="instruction" rows="4" [(ngModel)]="newRequest.instruction"></textarea>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="category" class="col-lg-1 col-lg-form-label">Category</label>
+        <div class="col-lg-11">
+            <select required="true" class="form-control" id="category" name="category" [(ngModel)]="newRequest.requestCategory">
+                <option>App Log</option>
+                <option>Batch log</option>
+                <option>DB Query</option>
+                <option>DB patch</option>
+                <option>BPM query</option>
+                <option>BPM patch</option>
+                <option>Others</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label for="requestedBy" class="col-lg-1 col-lg-form-label">Requested By</label>
+        <div class="col-lg-11">
+            <input required="true" type="text" class="form-control" id="requestedBy" name="requestedBy" [(ngModel)]="newRequest.requestedBy">
+        </div>
+    </div>
+
+    <div class="pull-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button (click)="closeRequestDetail(); false;" class="btn btn-primary">Cancel</button>
+    </div>
+</form>

@@ -3,8 +3,7 @@ var mongoose = require('mongoose');
 // Create the MovieSchema.
 var RequestSchema = new mongoose.Schema({
   _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    default: new mongoose.Types.ObjectId()
+    type: Number,
   },
   incidentNo: {
     type: String
@@ -26,7 +25,8 @@ var RequestSchema = new mongoose.Schema({
     default: new Date()
   },
   requestStatus: {
-    type: String
+    type: String,
+    default: 'PENDING'
   },
   _sr: {
     type: mongoose.Schema.Types.ObjectId,

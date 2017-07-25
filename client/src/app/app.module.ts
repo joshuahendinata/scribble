@@ -6,21 +6,35 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { RequestItemComponent } from './request-item/request-item.component';
+import { RequestItemDetailComponent } from './request-item/request-item-detail.component';
 import { SrItemComponent } from './sr-item/sr-item.component';
 import { PageNotFoundComponent } from './not-found.component';
 
 
 const appRoutes: Routes = [
   {
-    path: 'app/requestPage',
-    component: RequestItemComponent
+    path: 'app',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'requestPage'
+      },
+      {
+        path: 'requestPage',
+        component: RequestItemComponent
+      },
+      {
+        path: 'requestDetail',
+        component: RequestItemDetailComponent
+      },
+      {
+        path: 'srPage',
+        component: SrItemComponent
+      },
+    ]
   },
-  {
-    path: 'app/srPage',
-    component: SrItemComponent
-  },
-  { path: '', redirectTo: '/app/requestPage', pathMatch: 'full' },
-  { path: 'app', redirectTo: '/app/requestPage', pathMatch: 'full' },
+  { path: '', redirectTo: 'app/requestPage', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -29,6 +43,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     RequestItemComponent,
+    RequestItemDetailComponent,
     SrItemComponent,
     PageNotFoundComponent
   ],
