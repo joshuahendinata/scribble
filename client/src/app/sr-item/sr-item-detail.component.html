@@ -1,0 +1,35 @@
+<div class="overlay" *ngIf="renderOverlay"></div>
+
+<div class="alert alert-info" role="alert" *ngIf="pageFunction.message">{{pageFunction.message}}</div>
+
+<form #srItemForm="ngForm" (ngSubmit)="srDetailSubmit(srItemForm)" ngNativeValidate>
+  <div class="form-group row">
+    <label for="incidentNo" class="col-lg-1 col-lg-form-label">SR No.</label>
+    <div class="col-lg-11">
+      <input required="true" type="text" class="form-control" id="srNo" name="srNo" [(ngModel)]="srItemDetail.srNo">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="description" class="col-lg-1 col-lg-form-label">Remark</label>
+    <div class="col-lg-11">
+      <textarea required="true" class="form-control" id="remark" name="remark" rows="2" [(ngModel)]="srItemDetail.remark"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="instruction" class="col-lg-1 col-lg-form-label">Raised By</label>
+    <div class="col-lg-11">
+      <input required="true" type="text" class="form-control" 
+      id="raisedBy" name="raisedBy" rows="4" [(ngModel)]="srItemDetail.raisedBy"/>
+    </div>
+  </div>
+
+  <div class="pull-right">
+    <button *ngIf="pageFunction.code === 'SEARCH'; else submitButton" class="btn btn-primary" 
+    (click)="searchSrDetail(); false;">Search</button>
+    <ng-template #submitButton>
+      <button type="submit" class="btn btn-primary">Submit</button></ng-template>
+    <button (click)="closeSrDetail(); false;" class="btn btn-primary">Cancel</button>
+  </div>
+</form>

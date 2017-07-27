@@ -9,6 +9,7 @@ import { RequestItemComponent } from './request-item/request-item.component';
 import { RequestItemDetailComponent } from './request-item/request-item-detail.component';
 import { SrItemComponent } from './sr-item/sr-item.component';
 import { PageNotFoundComponent } from './not-found.component';
+import { SrItemDetailComponent } from './sr-item/sr-item-detail.component';
 
 
 const appRoutes: Routes = [
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     RequestItemComponent,
     RequestItemDetailComponent,
     SrItemComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SrItemDetailComponent
   ],
   imports: [
     BrowserModule,

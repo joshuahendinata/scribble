@@ -1,6 +1,6 @@
 <div class="overlay" *ngIf="renderOverlay"></div>
 
-<div class="alert alert-info" role="alert" *ngIf="pageFunction">{{pageFunction}}</div>
+<div class="alert alert-info" role="alert" *ngIf="pageFunction.message">{{pageFunction.message}}</div>
 
 <form #requestItemForm="ngForm" (ngSubmit)="requestDetailSubmit(requestItemForm)" ngNativeValidate>
     <div class="form-group row">
@@ -51,7 +51,7 @@
     </div>
 
     <div class="pull-right">
-        <button *ngIf="pageFunction == 'Search Request'; else submitButton" class="btn btn-primary"
+        <button *ngIf="pageFunction.code === 'SEARCH'; else submitButton" class="btn btn-primary"
         (click)="searchRequestDetail(); false;">Search</button>
         <ng-template #submitButton>
             <button type="submit" class="btn btn-primary">Submit</button

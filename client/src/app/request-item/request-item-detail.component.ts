@@ -18,7 +18,7 @@ export class RequestItemDetailComponent implements OnInit {
     newRequest: RequestItem;
     existingRequest: RequestItem; // item passed from requestItemComponent
     renderOverlay: boolean;
-    pageFunction: string;
+    pageFunction: any;
     queryParam : any; // passed from request-item component
 
     constructor(private requestItemService: RequestItemService,
@@ -26,7 +26,9 @@ export class RequestItemDetailComponent implements OnInit {
 
         this.renderOverlay = false;
         this.newRequest = new RequestItem();
-        this.pageFunction = "Adding new request";
+        this.pageFunction = {};
+        this.pageFunction.message = "Adding new request";
+        this.pageFunction.code = "ADD";
     }
 
     ngOnInit() {
@@ -73,7 +75,8 @@ export class RequestItemDetailComponent implements OnInit {
 
     closeRequestDetail() {
         
-        this.pageFunction = null;
+        this.pageFunction.code = null;
+        this.pageFunction.message = null;
         this.requestDetailClosedEvent.emit(null);
     }
 
@@ -82,11 +85,13 @@ export class RequestItemDetailComponent implements OnInit {
         console.log(requestDetailItem)
         this.existingRequest = requestDetailItem; // cache the existing one
         this.newRequest = jQuery.extend(true, {}, requestDetailItem); // clone the passed object
-        this.pageFunction = "Updating Request ID: " + this.newRequest._id;
+        this.pageFunction.code = "UPDATE";
+        this.pageFunction.message = "Updating Request ID: " + this.newRequest._id;
     }
 
     initSearchRequest(){
-        this.pageFunction = "Search Request";
+        this.pageFunction.code = "SEARCH";
+        this.pageFunction.message = "Search Request";
         this.newRequest = new RequestItem();
     }
 

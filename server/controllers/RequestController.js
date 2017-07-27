@@ -15,12 +15,12 @@ module.exports = function (app, route) {
       req.query = _.omit(req.query, 'tsp'); // remove the timestamp parameter
       console.log(req.query);
       next();
-    },
-    afterIndex: function(req, res, next){
-      console.log("AFTER INDEX");
-      console.log(res._headers['content-range'].split('/')[1]);
-      next();
     }
+    // afterIndex: function(req, res, next){
+    //   console.log("AFTER INDEX");
+    //   console.log(res._headers['content-range'].split('/')[1]);
+    //   next();
+    // }
   });
 
   // Return middleware.
