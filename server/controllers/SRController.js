@@ -1,5 +1,5 @@
-var Resource = require('resourcejs');
-var _ = require('lodash');
+const Resource = require('resourcejs');
+const _ = require('lodash');
 
 module.exports = function(app, route) {
 

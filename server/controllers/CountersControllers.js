@@ -1,11 +1,11 @@
 
-var mongojs = require('mongojs');
-var db = mongojs(global.dbConfigUrl);
-var counterCache = {};
+const mongojs = require('mongojs');
+const db = mongojs(global.dbConfigUrl);
+const counterCache = {};
 
 
 function getNextSequence(sequenceName, insertedObject, next) {
-    var ret = db.counters.findAndModify(
+    let ret = db.counters.findAndModify(
         {
             query: { _id: sequenceName },
             update: { $inc: { seq: 1 } },

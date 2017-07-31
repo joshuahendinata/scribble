@@ -1,15 +1,15 @@
 
-var path = require('path'); // system module
+const path = require('path'); // system module
 
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 global.dbConfigUrl = 'mongodb://admin:Password1@ds153732.mlab.com:53732/sr-mgmt-system';
-var _ = require('lodash');
+const _ = require('lodash');
 
-var app = express();
-var port = 3000;
+const app = express();
+const port = 3000;
 
 //body parser MW
 app.use(bodyParser.json());
@@ -25,7 +25,7 @@ mongoose.connection.once('open', function () {
 	app.models = require('./models/index');
 
 	// load ALL the routes
-	var routes = require('./routes');
+	const routes = require('./routes');
 
 	// iterate value, key in the routes.js
 	_.each(routes, function (controller, route) {
@@ -35,7 +35,7 @@ mongoose.connection.once('open', function () {
 	console.log('Listening on port ' + port);
 	app.listen(port);
 
-	var result = app.models.SRTO.findOne({
+	app.models.SRTO.findOne({
 		_id: '596b9370e8c01918b8abb5a7'
 	})
 	.populate('requestList')

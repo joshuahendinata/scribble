@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // Create the MovieSchema.
-var SRSchema = new mongoose.Schema({
+const SRSchema = new mongoose.Schema({
     raisedBy: {
         type: String
     },

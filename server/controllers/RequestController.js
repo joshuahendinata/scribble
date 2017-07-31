@@ -1,7 +1,7 @@
-var Resource = require('resourcejs');
-var nextSequence = require('./CountersControllers');
-var sequenceName = "requestSequence";
-var _ = require('lodash');
+const Resource = require('resourcejs');
+const nextSequence = require('./CountersControllers');
+const sequenceName = "requestSequence";
+const _ = require('lodash');
 
 module.exports = function (app, route) {
 
