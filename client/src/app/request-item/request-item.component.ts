@@ -14,6 +14,7 @@ export class RequestItemComponent implements OnInit, AfterViewInit {
   renderRequestDetail: boolean;
   shownList: RequestItem[];
   queryParam: any;
+  requestIdsSelectionForSr: Map<number, boolean> ;
 
   // Annotation to tell angular to keep looking for a component. look for ngAfterViewInit()
   @ViewChildren("requestItemDetailComponent")
@@ -31,6 +32,7 @@ export class RequestItemComponent implements OnInit, AfterViewInit {
 
     this.findRequestItemByCriteria();
     this.renderRequestDetail = false;
+    this.requestIdsSelectionForSr = new Map<number, boolean>();
   }
 
 
@@ -156,5 +158,18 @@ export class RequestItemComponent implements OnInit, AfterViewInit {
     }
 
     this.renderRequestDetail = false;
+  }
+
+
+  addRequestToSelection(selectedRequest: RequestItem, eventComponent){
+    console.log("selectedRequest._id:" + selectedRequest._id);
+    console.log("eventComponent.target.checked:" + eventComponent.target.checked);
+
+    this.requestIdsSelectionForSr.set(selectedRequest._id, eventComponent.target.checked);
+  }
+
+  initCreateSR(){
+    console.log("this.requestIdsSelectionForSr");
+    console.log(this.requestIdsSelectionForSr);
   }
 }
