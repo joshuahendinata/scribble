@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // Create the MovieSchema.
-var RequestSchema = new mongoose.Schema({
+const RequestSchema = new mongoose.Schema({
   _id: {
     type: Number,
   },
